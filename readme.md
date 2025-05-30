@@ -1,88 +1,109 @@
-Mapa Interativo de Lotes para WordPress
-Este é um plugin WordPress que fornece um shortcode [lotes_mapa_interativo] para criar um mapa interativo de lotes imobiliários. O mapa exibe uma imagem de fundo com ícones arrastáveis que representam lotes, permitindo que administradores ajustem suas posições diretamente no frontend e salvem as alterações via AJAX. Os lotes podem ter três estados: Disponível, Reservado ou Comprado, com informações adicionais exibidas em tooltips.
-Funcionalidades
 
-Exibe até 190 lotes de um Custom Post Type (lotes) em um mapa interativo.
-Permite arrastar e ajustar a posição dos ícones dos lotes (apenas para usuários logados).
-Suporta ajuste fino das posições com teclas de seta (para usuários logados).
-Exibe tooltips com informações do lote (Quadra, Lote, Comprador, se aplicável).
-Permite que administr WPrds salvem as posições dos lotes via AJAX usando um botão "Publicar Posições".
-Estilização responsiva com cores específicas para cada estado do lote.
+# Plugin Mapa Interativo de Lotes para WordPress
 
-Requisitos
+Este é um plugin WordPress que permite criar um **Mapa Interativo de Lotes Imobiliários** usando um shortcode simples. Ideal para construtoras, loteadoras e imobiliárias que desejam exibir de forma visual a disponibilidade dos lotes em um empreendimento.
 
-WordPress 5.0 ou superior.
-Um Custom Post Type chamado lotes configurado no WordPress.
-Metadados _status_do_lote (ex.: disponivel, reservado, comprado) e _nome_do_comprador (opcional) associados aos lotes.
-Uma imagem de mapa (formato BMP, PNG ou JPG) hospedada no servidor WordPress.
+## 🔥 Funcionalidades
 
-Instalação
+- 📍 **Mapa Interativo:** Exibe até 190 lotes sobre uma imagem de mapa.
+- 🔄 **Posicionamento Dinâmico:** Ícones dos lotes podem ser arrastados no frontend (apenas para usuários logados).
+- 🎯 **Ajuste Fino:** Permite mover os ícones utilizando as teclas de seta (usuários logados).
+- 🏷️ **Tooltips Informativos:** Mostra informações como:
+  - Quadra
+  - Lote
+  - Status (Disponível, Reservado ou Comprado)
+  - Nome do comprador (se aplicável)
+- 💾 **Salvar Posições via AJAX:** Administradores podem salvar a posição dos ícones diretamente no frontend.
+- 🖌️ **Estilo Responsivo:** Cores específicas para cada status dos lotes.
 
-Faça o download do arquivo lotes-mapa-interativo.php deste repositório.
-Coloque o arquivo na pasta /wp-content/plugins/ do seu site WordPress.
-Ative o plugin no painel de administração do WordPress (Plugins > Plugins Instalados > Ativar).
-Certifique-se de que o Custom Post Type lotes está registrado e possui os metadados necessários.
+## ✅ Requisitos
 
-Configuração
+- WordPress 5.0 ou superior.
+- Custom Post Type (CPT) chamado **lotes**.
+- Metadados:
+  - `_status_do_lote` (valores: `disponivel`, `reservado`, `comprado`).
+  - `_nome_do_comprador` (opcional).
 
-Custom Post Type:
+## 🛠️ Instalação
 
-Crie um Custom Post Type chamado lotes (pode usar um plugin como Custom Post Type UI ou código personalizado).
-Adicione metadados _status_do_lote e _nome_do_comprador aos posts (pode usar Advanced Custom Fields ou código personalizado).
+1. Faça o download do arquivo `lotes-mapa-interativo.php`.
+2. Envie para a pasta `/wp-content/plugins/` do seu site WordPress.
+3. Ative no painel WordPress em **Plugins > Plugins Instalados**.
 
+## ⚙️ Configuração
 
-Imagem do Mapa:
+### 1️⃣ Custom Post Type
 
-Faça upload da imagem do mapa para a biblioteca de mídia do WordPress.
-Atualize a URL da imagem no código do plugin (procure por img src no arquivo lotes-mapa-interativo.php).
+- Crie um CPT chamado **lotes** (use o plugin "Custom Post Type UI" ou código próprio).
+- Adicione os metadados `_status_do_lote` e `_nome_do_comprador` (via plugin "Advanced Custom Fields" ou código).
 
+### 2️⃣ Imagem do Mapa
 
-Uso do Shortcode:
+- Faça upload da imagem do mapa (formato `.bmp`, `.png` ou `.jpg`) na Biblioteca de Mídia.
+- Atualize a URL da imagem no código do plugin procurando por:
 
-Adicione o shortcode [lotes_mapa_interativo] em uma página ou post onde deseja exibir o mapa.
+```html
+<img src="URL-DA-SUA-IMAGEM" ... />
+```
 
+### 3️⃣ Uso do Shortcode
 
+- Utilize o shortcode:
 
-Como Usar
+```plaintext
+[lotes_mapa_interativo]
+```
 
-Para visitantes: O mapa exibe ícones sobre uma imagem de fundo, com tooltips mostrando informações como Quadra, Lote e, para lotes comprados, o nome do comprador.
-Para usuários logados: Os ícones são arrastáveis, permitindo reposicionamento no mapa.
-Para administradores:
-Um botão "Publicar Posições" aparece no topo do mapa.
-Clique em um ícone para selecioná-lo e use as teclas de seta para ajustes finos.
-Clique em "Publicar Posições" para salvar as posições dos ícones via AJAX.
+Em qualquer página ou post onde deseja exibir o mapa.
 
+## 🚀 Como Usar
 
+### Para Visitantes
 
-Estrutura do Código
+- Visualizam o mapa com ícones e tooltips contendo informações dos lotes.
 
-Shortcode [lotes_mapa_interativo]:
-Usa WP_Query para buscar até 190 lotes.
-Gera HTML com uma imagem de fundo e ícones arrastáveis.
-Inclui CSS para estilização e JavaScript para interatividade (drag-and-drop, tooltips, ajustes com teclado).
+### Para Usuários Logados
 
+- Podem arrastar os ícones para reposicionamento no mapa.
+- Podem usar as teclas de seta para ajustes precisos.
 
-Função AJAX:
-Ação save_lotes_positions salva as posições dos ícones no banco de dados (opção lotes_positions).
-Inclui verificação de nonce para segurança e restrição a administradores.
+### Para Administradores
 
+- Visualizam o botão **"Publicar Posições"**.
+- Após ajustes no mapa, clique no botão para salvar as posições via AJAX.
 
+## 🗂️ Estrutura do Código
 
-Personalização
+- **Shortcode `[lotes_mapa_interativo]`:**
+  - Usa `WP_Query` para buscar até 190 lotes.
+  - Renderiza HTML com imagem de fundo e ícones posicionáveis.
+  - Inclui CSS inline e JavaScript para:
+    - Drag & Drop
+    - Tooltips
+    - Ajuste via teclado
 
-Imagem do Mapa: Substitua a URL da imagem no código pela sua própria imagem (ex.: wp-content/uploads/seu-mapa.jpg).
-Estilização: Edite o CSS inline no arquivo para ajustar cores, tamanhos ou outros estilos.
-Lógica de Quadras: A função getQuadraAndLote mapeia slugs de lotes (ex.: lote-1, lote-1-2) para Quadra e Lote. Ajuste os limites de quadras conforme necessário.
+- **Função AJAX:**
+  - Ação `save_lotes_positions` salva as posições no banco (via `update_option('lotes_positions')`).
+  - Verificação de nonce e restrição a administradores para segurança.
 
-Contribuindo
+## 🎨 Personalização
 
-Faça um fork deste repositório.
-Crie uma branch para suas alterações (git checkout -b minha-alteracao).
-Faça commit das suas alterações (git commit -m "Descrição da alteração").
-Envie para o repositório remoto (git push origin minha-alteracao).
-Crie um Pull Request.
+- **Imagem do mapa:** Atualize a URL da imagem no HTML do plugin.
+- **Estilização:** Edite os estilos no CSS inline do arquivo.
+- **Lógica de quadras:** A função `getQuadraAndLote()` converte slugs (ex.: `lote-1`, `lote-1-2`) para quadra e lote. Altere os limites de quadras conforme seu empreendimento.
 
-Licença
-Este projeto está licenciado sob a Licença MIT.
-Contato
-Para suporte ou dúvidas, abra uma issue neste repositório ou entre em contato com o desenvolvedor.
+## 🤝 Contribuindo
+
+1. Faça um fork deste repositório.
+2. Crie uma branch (`git checkout -b minha-alteracao`).
+3. Commit (`git commit -m "Descrição da alteração"`).
+4. Push (`git push origin minha-alteracao`).
+5. Abra um Pull Request.
+
+## 📜 Licença
+
+Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).
+
+## 📞 Contato
+
+Para suporte ou dúvidas, abra uma *issue* neste repositório ou entre em contato com o desenvolvedor (Miguel Faria).
